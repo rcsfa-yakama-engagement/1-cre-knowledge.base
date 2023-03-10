@@ -276,6 +276,7 @@ var path2 = __toESM(require("path"));
 
 // src/config.ts
 var ATTACHMENT_URL_REGEXP = /!\[\[((.*?)\.(\w+))\]\]/g;
+var MARKDOWN_ATTACHMENT_URL_REGEXP = /!\[(.*?)\]\(((.*?)\.(\w+))\)/g;
 var EMBED_URL_REGEXP = /!\[\[(.*?)\]\]/g;
 var GMT_IMAGE_FORMAT = "![]({0})";
 var DEFAULT_SETTINGS = {
@@ -290,7 +291,8 @@ var import_md5 = __toESM(require_md5());
 var import_obsidian = require("obsidian");
 async function getImageLinks(markdown) {
   const imageLinks = markdown.matchAll(ATTACHMENT_URL_REGEXP);
-  return Array.from(imageLinks);
+  const markdownImageLinks = markdown.matchAll(MARKDOWN_ATTACHMENT_URL_REGEXP);
+  return Array.from(imageLinks).concat(Array.from(markdownImageLinks));
 }
 async function getEmbeds(markdown) {
   const embeds = markdown.matchAll(EMBED_URL_REGEXP);
@@ -348,17 +350,16 @@ async function tryCopyImage(plugin, contentPath) {
     await plugin.app.vault.adapter.read(contentPath).then(async (content) => {
       const imageLinks = await getImageLinks(content);
       for (const index in imageLinks) {
-        const imageLink = imageLinks[index][1];
+        const imageLink = imageLinks[index][imageLinks[index].length - 3];
         const imageLinkMd5 = (0, import_md5.default)(imageLink);
         const imageExt = path.extname(imageLink);
         const ifile = plugin.app.metadataCache.getFirstLinkpathDest(imageLink, contentPath);
-        if (ifile) {
-          plugin.app.vault.adapter.copy(ifile.path, path.join(plugin.settings.output, plugin.settings.attachment, imageLinkMd5.concat(imageExt))).catch((error) => {
-            if (!error.message.contains("file already exists")) {
-              throw error;
-            }
-          });
-        }
+        const filePath = ifile !== null ? ifile.path : path.join(path.dirname(contentPath), imageLink);
+        plugin.app.vault.adapter.copy(filePath, path.join(plugin.settings.output, plugin.settings.attachment, imageLinkMd5.concat(imageExt))).catch((error) => {
+          if (!error.message.contains("file already exists")) {
+            throw error;
+          }
+        });
       }
     });
   } catch (error) {
@@ -387,10 +388,10 @@ async function tryCopyMarkdownByRead(plugin, { file, outputSubPath = "." }) {
       const imageLinks = await getImageLinks(content);
       for (const index in imageLinks) {
         const rawImageLink = imageLinks[index][0];
-        const imageLink = imageLinks[index][1];
+        const imageLink = imageLinks[index][imageLinks[index].length - 3];
         const imageLinkMd5 = (0, import_md5.default)(imageLink);
         const imageExt = path.extname(imageLink);
-        const hashLink = path.join(plugin.settings.attachment, imageLinkMd5.concat(imageExt));
+        const hashLink = path.join(plugin.settings.attachment, imageLinkMd5.concat(imageExt)).replace("\\", "/");
         if (plugin.settings.GTM) {
           content = content.replace(rawImageLink, GMT_IMAGE_FORMAT.format(hashLink));
         } else {
@@ -457,7 +458,7 @@ var MarkdownExportSettingTab = class extends import_obsidian2.PluginSettingTab {
       await this.plugin.saveSettings();
     }));
     new import_obsidian2.Setting(containerEl).setName("Custom attachment path(optional)").setDesc("attachment path").addText((text) => text.setPlaceholder("Enter attachment path").setValue(this.plugin.settings.attachment).onChange(async (value) => {
-      this.plugin.settings.output = value;
+      this.plugin.settings.attachment = value;
       await this.plugin.saveSettings();
     }));
     new import_obsidian2.Setting(containerEl).setName("Use GitHub Flavored Markdown Format").setDesc("The format of markdown is more inclined to choose Github Flavored Markdown").addToggle((toggle) => toggle.setValue(this.plugin.settings.GTM).onChange(async (value) => {

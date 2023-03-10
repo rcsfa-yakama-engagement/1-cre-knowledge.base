@@ -7,5 +7,6 @@
   "obsidian-enhancing-export",
   "obsidian-link-converter",
   "obsidian-markdown-export-plugin",
-  "obsidian-pandoc"
+  "obsidian-pandoc",
+  "obsidian-tasks-plugin"
 ]

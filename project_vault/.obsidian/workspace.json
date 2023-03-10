@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PLATFORMS/Org_platforms/Check-in Meetings/Check-in Meetings.md",
+                "file": "PEOPLE/Jessica Black/Jessica Black.md",
                 "mode": "source",
                 "source": false
               }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PLATFORMS/Org_platforms/Check-in Meetings/Check-in Meetings.md",
+                "file": "PEOPLE/Jessica Black/Jessica Black.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PLATFORMS/Org_platforms/Check-in Meetings/Check-in Meetings.md"
+                "file": "PEOPLE/Jessica Black/Jessica Black.md"
               }
             }
           }
@@ -136,8 +136,13 @@
   },
   "active": "7d6cd837d17280ff",
   "lastOpenFiles": [
-    "PEOPLE/Jessica Black/Jessica Black.md",
+    "TASKS/TASKS.md",
+    "PEOPLE/Elaine Harvey/Elaine Harvey.md",
+    "PEOPLE/Khadijah Homolka/Khadijah Homolka.md",
+    "Tools/TOOLS.md",
     "PLATFORMS/Org_platforms/Check-in Meetings/Check-in Meetings.md",
+    "PEOPLE/Elaine Harvey",
+    "PEOPLE/Jessica Black/Jessica Black.md",
     "Tasks/Tasks.md",
     "PRODUCTS/PRODUCTS.md",
     "PRODUCTS/Yakama Nation Outreach Presentation.md",
@@ -157,7 +162,6 @@
     "PEOPLE/Laurene Contreras/Laurene Contreras.md",
     "PEOPLE/Koralynne Tom/Koralynne Tom.md",
     "PLATFORMS/Org_platforms/River Corridors SFA/River Corridors SFA.md",
-    "Tools/TOOLS.md",
     "PLATFORMS/Org_platforms/Check-in Meetings",
     "PLATFORMS/Org_platforms/Yakama Nation Environmental Restoration Waste Management",
     "PLATFORMS/Org_platforms/River Corridors SFA",
@@ -165,12 +169,8 @@
     "PLATFORMS/Org_platforms/Yakama Nation Tribal School",
     "PEOPLE/Tim Scheibe/Tim Scheibe.md",
     "PEOPLE/Star Diavolikis/Star Diavolikis.md",
-    "PEOPLE/Samantha Redheart/Samantha Redheart.md",
-    "PEOPLE/Khadijah Homolka/Khadijah Homolka.md",
-    "PEOPLE/Keegan Livermore/Keegan Livermore.md",
     "PEOPLE/Corbin Schuster",
     "PEOPLE/Koralynne Tom",
-    "PEOPLE/Samantha Redheart",
-    "PEOPLE/Laurene Contreras"
+    "PEOPLE/Samantha Redheart"
   ]
 }
